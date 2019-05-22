@@ -31,7 +31,7 @@ public class FreeForAll : MonoBehaviourPun , IPunObservable
             {
                 LobbyCamera.SetActive(false);
                 SpawnCountDown.gameObject.SetActive(false);
-                PhotonNetwork.Instantiate("Player",Vector3.zero,Quaternion.identity,0);
+                PhotonNetwork.Instantiate("ToonSoldiers1", Vector3.zero,Quaternion.identity,0);
                 HasPlayerSpawned = true;
             }
             timer = 0;
