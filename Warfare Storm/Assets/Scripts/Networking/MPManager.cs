@@ -8,16 +8,26 @@ using UnityEngine.SceneManagement;
 
 public class MPManager : MonoBehaviourPunCallbacks
 {
+    public GameObject[] EnableObjectsConnect;
+    public GameObject[] DisableObjectsConnect;
+
     // Start is called before the first frame update
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
-        
+
     }
 
     public override void OnConnectedToMaster()
     {
-       
+        foreach (GameObject obj in EnableObjectsConnect)
+        {
+            obj.SetActive(true);
+        }
+        foreach (GameObject obj in DisableObjectsConnect)
+        {
+            obj.SetActive(false);
+        }
         Debug.Log("We are now connected to Photon!");
     }
 
@@ -38,6 +48,11 @@ public class MPManager : MonoBehaviourPunCallbacks
         RoomOptions ro = new RoomOptions { MaxPlayers = 10, IsOpen = true, IsVisible = true };
         PhotonNetwork.CreateRoom("defaultF4A", ro, TypedLobby.Default);
 
+       
+    }
+
+    public override void OnJoinedRoom()
+    {
         SceneManager.LoadScene(3);
     }
 
